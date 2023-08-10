@@ -1,31 +1,101 @@
 <!DOCTYPE html>
-<html lang=en>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: rgb(186, 198, 214);
+        overflow-y: hidden;
+        overflow-x: hidden;
+      }
+      .box {
+        position: relative;
+        text-align: center;
+      }
+      .box .body_img {
+        height: 400px;
+      }
+      .meat {
+        position: absolute;
+        top: 0;
+        width: 50px;
+      }
 
-<head>
-    <meta charset=utf-8>
-    <meta http-equiv=X-UA-Compatible content="IE=edge">
-    <meta name=viewport content="width=device-width,initial-scale=1">
-    <link rel=icon href=/favicon.ico> <title>02-super-mall</title>
-    <link href=/css/chunk-01935186.481860b0.css rel=prefetch>
-    <link href=/css/chunk-04260572.314a1059.css rel=prefetch>
-    <link href=/css/chunk-19cb6267.5f9fad7e.css rel=prefetch>
-    <link href=/css/chunk-235fe52e.6fcb7175.css rel=prefetch>
-    <link href=/css/chunk-64f27310.65a9631c.css rel=prefetch>
-    <link href=/css/chunk-7308565f.b6c8b16a.css rel=prefetch>
-    <link href=/js/chunk-01935186.b7c14427.js rel=prefetch>
-    <link href=/js/chunk-04260572.ae2c493a.js rel=prefetch>
-    <link href=/js/chunk-19cb6267.06f0adc5.js rel=prefetch>
-    <link href=/js/chunk-235fe52e.d42f1cf1.js rel=prefetch>
-    <link href=/js/chunk-2d0b724a.a5d3c26f.js rel=prefetch>
-    <link href=/js/chunk-64f27310.b27a84bc.js rel=prefetch>
-    <link href=/js/chunk-7308565f.c09cb196.js rel=prefetch>
-    <link href=/css/app.f7363c0b.css rel=preload as=style>
-    <link href=/js/app.edbf2567.js rel=preload as=script>
-    <link href=/js/chunk-vendors.47cd19c6.js rel=preload as=script>
-    <link href=/css/app.f7363c0b.css rel=stylesheet>
-</head>
+      .eye {
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        background-color: #fff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      .eye_core {
+        position: relative;
+        background-color: #196e8b;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+      }
+      .left_eye {
+        top: 90px;
+        left: 132px;
+      }
+      .right_eye {
+        top: 90px;
+        left: 220px;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="height: 50px"></div>
+    <div class="box">
+      <div class="body">
+        <img class="body_img" src="./img/01.png" />
+        <div class="left_eye eye">
+          <div class="left_eye_core eye_core"></div>
+        </div>
+        <div class="right_eye eye">
+          <div class="right_eye_core eye_core"></div>
+        </div>
+      </div>
 
-<body><noscript><strong>We're sorry but 02-super-mall doesn't work properly without JavaScript enabled. Please enable it
-            to continue.</strong></noscript>
-    <div id=app></div>
-    <script src=/js/chunk-vendors.47cd19c6.js> </script> <script src=/js/app.edbf2567.js> </script> </body> </html>
+      <img src="./img/meat.png" alt="" class="meat" />
+    </div>
+  </body>
+</html>
+<script>
+  const meat = document.querySelector(".meat");
+  const body_img = document.querySelector(".body_img");
+  const left_eye_core = document.querySelector(".left_eye_core");
+  const right_eye_core = document.querySelector(".right_eye_core");
+  const body = document.body;
+
+  meat.addEventListener("touchmove", function (e) {
+    const bodyWidth = body.clientWidth;
+    const bodyHeight = body.clientHeight;
+
+    const partWidth = bodyWidth / 16;
+    const partHeight = bodyHeight / 16;
+
+    const meatWidth = e.target.offsetWidth;
+    const meatHeight = e.target.offsetHeight;
+    let _x_move = e.touches[0].pageX;
+    let _y_move = e.touches[0].pageY;
+    // console.log(e.touches[0].pageY);
+    meat.style.left = _x_move - meatWidth / 2 + "px";
+    meat.style.top = _y_move - 50 - meatHeight / 2 + "px";
+
+    left_eye_core.style.left = _x_move / partWidth - 8 + "px";
+    left_eye_core.style.top = _y_move / partHeight - 8 + "px";
+    right_eye_core.style.left = _x_move / partWidth - 8 + "px";
+    right_eye_core.style.top = _y_move / partHeight - 8 + "px";
+  });
+</script>
